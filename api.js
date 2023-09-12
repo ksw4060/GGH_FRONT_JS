@@ -21,12 +21,7 @@ async function handleSignin() {
             "password": password
         })
     })
-
-    if (response.status == 201) {
-        alert("회원가입을 축하합니다!")
-        window.location.replace(`${frontend_base_url}/login.html`)
-
-    }
+    return response
 }
 
 async function handleLogin() {
@@ -82,4 +77,5 @@ async function handleLogout() {
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
     localStorage.removeItem("payload");
+    location.reload()
 }
