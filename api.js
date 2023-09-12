@@ -6,9 +6,10 @@ window.onload = () => {
 }
 
 async function handleSignin() {
+    const username = document.getElementById("username").value
     const email = document.getElementById("email").value
     const password = document.getElementById("password").value
-    console.log(email, password)
+    console.log(email, password, username)
 
 
     const response = await fetch(`${backend_base_url}/users/signup/`, {
@@ -17,6 +18,7 @@ async function handleSignin() {
         },
         method: 'POST',
         body: JSON.stringify({
+            "username": username,
             "email": email,
             "password": password
         })
