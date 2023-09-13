@@ -6,11 +6,13 @@ fetch("./navbar.html").then(response => {
 })
     .then(data => {
         document.querySelector("header").innerHTML = data;
-        gimotti();
+        // 1. header 라는 속성에 innerHTML 에 먼저 navbar.html 코드(데이터)를 담아주고
+        buttonBlockAndHide();
+        // 2. 아래의 buttonBlockAndHide 함수를 순차적으로 실행한다.
     })
 
 
-const gimotti = () => {
+const buttonBlockAndHide = () => {
     // 페이로드를 로컬스토리지에 저장하고, 페이로드에 있는 사용자 정보를 가져옴
 
     const payload = localStorage.getItem("payload");
@@ -43,7 +45,7 @@ const gimotti = () => {
         console.log("로그인 버튼 Block")
 
     }
-
+}
     // console.log(payload)
     // console.log(typeof payload)
     // console.log(payload_parse)
@@ -54,5 +56,5 @@ const gimotti = () => {
 
 
 
-}
+
 
