@@ -81,3 +81,15 @@ async function handleLogout() {
     localStorage.removeItem("payload");
     location.reload()
 }
+
+
+async function getArticles() {
+    const response = await fetch(`${backend_base_url}/articles/`)
+
+    if (response.status == 200) {
+        const response_json = await response.json()
+        return response_json
+    } else {
+        alert("게시글을 불러오는데 실패 했습니다")
+    }
+}
