@@ -1,13 +1,20 @@
 console.log("index.js loading...");
 
-window.onload = async function loadArticles() {
-  articles = await getArticles();
-  console.log(articles);
+function articleDetail(article_id) {
+  window.location.href = `${frontend_base_url}/article_detail.html?article_id=${article_id}`;
+}
 
+window.onload = async function loadArticles() {
+  // 게시글 전체 리스트를 가져오는 getArticles
+  articles = await getArticles();
+  console.log(articles); // 콘솔로그를 확인하면, 게시글 전체 리스트가 나온다
+  // 게시글 전체에 대한 변수 지정
   const article_list = document.getElementById("article-list");
+  //게시글 전체 리스트 안에 있는, 각 게시글들에 대해서 속성 지정
   articles.forEach((article) => {
     const newColumn = document.createElement("div");
     newColumn.setAttribute("class", "col col-sm-1 col-md-4");
+    newColumn.setAttribute("onclick", `articleDetail(${article.id})`);
 
     const newCard = document.createElement("div");
     newCard.setAttribute("class", "card mb-5");

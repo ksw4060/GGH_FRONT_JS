@@ -1,9 +1,7 @@
 const frontend_base_url = "http://127.0.0.1:5500";
 const backend_base_url = "http://127.0.0.1:8000";
 
-window.onload = () => {
-  console.log("로딩되었음");
-};
+console.log("api.js 로드..");
 
 async function handleSignin() {
   const username = document.getElementById("username").value;
@@ -123,5 +121,29 @@ async function postArticle() {
     window.location.replace(`${frontend_base_url}/`);
   } else {
     alert(`${response.status}!, 잘못된 게시글 생성 요청입니다!`);
+  }
+}
+
+async function getArticle(articleId) {
+  const response = await fetch(`${backend_base_url}/articles/${articleId}/`);
+
+  if (response.status == 200) {
+    response_json = await response.json();
+    return response_json;
+  } else {
+    alert(`${response.status}! 게시글을 가져오지 못했습니다!`);
+  }
+}
+
+async function getComments(articleId) {
+  const response = await fetch(
+    `${backend_base_url}/articles/${articleId}/comment/`
+  );
+
+  if (response.status == 200) {
+    response_json = await response.json();
+    return response_json;
+  } else {
+    alert(`${response.status}! 댓글들을 가져오지 못했습니다!`);
   }
 }
