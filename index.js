@@ -7,16 +7,18 @@ window.onload = async function loadArticles() {
   const article_list = document.getElementById("article-list");
   articles.forEach((article) => {
     const newColumn = document.createElement("div");
-    newColumn.setAttribute("class", "col");
+    newColumn.setAttribute("class", "col col-sm-1 col-md-4");
 
     const newCard = document.createElement("div");
-    newCard.setAttribute("class", "card");
+    newCard.setAttribute("class", "card mb-5");
     newCard.setAttribute("id", article.id);
+    newCard.style.width = "95%";
 
     newColumn.appendChild(newCard);
 
     const articleImage = document.createElement("img");
-    articleImage.setAttribute("class", "card-img-top");
+    articleImage.setAttribute("class", "card-img-top img-fluid");
+
     if (article.uploaded_image) {
       articleImage.setAttribute(
         "src",
