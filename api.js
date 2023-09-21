@@ -147,3 +147,44 @@ async function getComments(articleId) {
     alert(`${response.status}! 댓글들을 가져오지 못했습니다!`);
   }
 }
+
+async function postComment(articleId, newComment) {
+  let token = localStorage.getItem("access");
+
+  const response = await fetch(
+    `${backend_base_url}/articles/${articleId}/comment/`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        comment: newComment,
+      }),
+    }
+  )
+    .then((response) => {
+      if (response.status == 201) {
+        alert("댓글 작성에 성공했습니다 !");
+        // $("div-comment").load(window.location.href + "div-comment");
+        // window.location.replace(
+        //   `${frontend_base_url}/article_detail.html?article_id=${articleId}`
+        // );
+
+        return response.json();
+      } else if (response.status == 401) {
+        alert("로그인 해주셔야 댓글 작성이 가능합니다");
+        Promise.reject("401 Unauthorized!");
+      } else if (response.status == 404) {
+        alert("게시글이 없거나, url이 잘못되었습니다");
+        Promise.reject("404 Page not found !");
+      } else {
+        alert(`${response.status}! 댓글 작성하지 못했습니다...!`);
+        Promise.reject(`${response.status}! 왜 실패했을 까요?`);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}

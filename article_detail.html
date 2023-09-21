@@ -28,11 +28,27 @@
             <div id="article-content" class="col align-self-center">게시글 내용</div>
         </div>
     </div>
-    <div class="container">
-        <ul class="list-unstyled" id="comment-list">
-
-        </ul>
+    <div class="container" id="div-comment">
+        <!-- 작성된 댓글들을 모두 불러옵니다 -->
+        <div class="container">
+            <ul class="list-unstyled" id="comment-list"></ul>
+        </div>
+        <!-- 새로운 댓글을 작성합니다 -->
+        <div class="container">
+            <form>
+                <div class="form-row">
+                    <div class="col-7">
+                        <input type="text" class="form-control" id="new-comment" placeholder="댓글을 등록해주세요.">
+                    </div>
+                    <div class="col">
+                        <!-- type을 따로 설정하지 않으면, default가 summit 임. -->
+                        <button class="btn btn-primary" type="button" onclick="submitComment()">등록</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
+
 </body>
 
 </html>

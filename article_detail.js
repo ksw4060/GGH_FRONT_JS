@@ -1,10 +1,12 @@
 console.log("article_datail.js 로드...");
+let articleId;
 
 async function loadComments(articleId) {
   const response = await getComments(articleId);
   console.log(response);
 
   const commentListUl = document.getElementById("comment-list");
+  commentListUl.innerHTML = "";
   response.forEach((comment) => {
     commentListUl.innerHTML += `
     <li class="media d-flex mb-5 mt-5">
@@ -17,6 +19,16 @@ async function loadComments(articleId) {
         </div>
     </li>`;
   });
+}
+
+async function submitComment() {
+  const commentElement = document.getElementById("new-comment");
+  const newComment = commentElement.value;
+  const response = await postComment(articleId, newComment);
+  console.log(response);
+  commentElement.value = "";
+
+  loadComments(articleId);
 }
 
 async function loadArticles(articleId) {
@@ -49,8 +61,7 @@ async function loadArticles(articleId) {
 
 window.onload = async function () {
   const urlParams = new URLSearchParams(window.location.search);
-  const articleId = urlParams.get("article_id");
-  console.log(articleId);
+  articleId = urlParams.get("article_id");
 
   await loadComments(articleId);
   await loadArticles(articleId);
